@@ -34,7 +34,7 @@ class SessionController extends Controller
     public function login()
     {
         Log::info("An attempt to login was made", request(['username', 'password']));
-
+        
         // Sign in as customer
         if (Auth::guard('web_user')->attempt(request(['username', 'password']))) {
             //Log customer login success

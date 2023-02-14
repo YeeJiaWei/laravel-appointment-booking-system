@@ -13,7 +13,7 @@
 		<div class="form-group">
 			<label for="booking_employee">Employee <span class="request__validate">(Title - Full Name - ID)</span></label>
 			<select name="employee_id" id="booking_employee" class="form-control request__input" onchange="showRedirect('.loading', '/admin/bookings/{{ $dateString }}/' + this.value)">
-				@foreach (Employee::all()->sortBy('lastname')->sortBy('firstname')->sortBy('title') as $e)
+				@foreach (\App\Models\Employee::all()->sortBy('lastname')->sortBy('firstname')->sortBy('title') as $e)
 					<option value="{{ $e->id }}" {{ old('employee_id') == $e->id || $employeeID == $e->id ? 'selected' : null }}>{{ $e->title . ' - ' . $e->firstname . ' ' . $e->lastname . ' - ' . $e->id }}</option>
 				@endforeach
 				<option value="" {{ old('employee_id') || $employeeID ? null : 'selected' }}>-- None --</option>
@@ -40,7 +40,7 @@
 		<div class="form-group">
 			<label for="booking_customer">Customer <span class="request__validate">(Full Name - ID)</span></label>
 			<select name="customer_id" id="booking_customer" class="form-control request__input">
-				@foreach (Customer::all()->sortBy('lastname')->sortBy('firstname') as $customer)
+				@foreach (\App\Models\Customer::all()->sortBy('lastname')->sortBy('firstname') as $customer)
 					<option value="{{ $customer->id }}">{{ $customer->firstname }} - {{$customer->lastname }} - {{ $customer->id }}</option>
 				@endforeach
 			</select>
@@ -48,7 +48,7 @@
 		<div class="form-group">
 			<label for="booking_activity">Activity <span class="request__validate">(Name - Duration)</span></label>
 			<select name="activity_id" id="booking_activity" class="form-control request__input">
-				@foreach (Activity::all()->sortBy('name') as $activity)
+				@foreach (\App\Models\Activity::all()->sortBy('name') as $activity)
 					<option value="{{ $activity->id }}" {{ old('activity_id') == $activity->id ? 'selected' : null }}>{{ $activity->name . ' - ' . $activity->duration }}</option>
 				@endforeach
 			</select>

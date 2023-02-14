@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Laravel\Dusk\DuskServiceProvider;
 
-use App\Activity;
-use App\Booking;
-use App\WorkingTime;
-use App\BusinessTime;
+use App\Models\Activity;
+use App\Models\Booking;
+use App\Models\WorkingTime;
+use App\Models\BusinessTime;
 
 use Carbon\Carbon;
 
@@ -24,9 +24,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-		// Additional code to fix php artisan migrate error for (unique key too long on certain systems)
-        Schema::defaultStringLength(191);
-
         // Validator that checks if value is a day of the week
         Validator::extend('is_day_of_week', function ($attribute, $value, $parameters, $validator) {
             foreach (getDaysOfWeek() as $day) {
@@ -51,8 +48,7 @@ class AppServiceProvider extends ServiceProvider
             // Find activity or return false
             try {
                 $activity = Activity::findOrFail($request['activity_id']);
-            }
-            catch (ModelNotFoundException $e) {
+            } catch (ModelNotFoundException $e) {
                 return false;
             }
 
@@ -73,9 +69,11 @@ class AppServiceProvider extends ServiceProvider
 
                 // If times are conflicting with any exiting booking
                 // Then break and return false
-                if ($reqStartTime >= $bookStartTime && $reqEndTime <= $bookEndTime ||
+                if (
+                    $reqStartTime >= $bookStartTime && $reqEndTime <= $bookEndTime ||
                     $reqStartTime < $bookStartTime && $reqEndTime > $bookStartTime ||
-                    $reqStartTime < $bookEndTime && $reqEndTime > $bookEndTime) {
+                    $reqStartTime < $bookEndTime && $reqEndTime > $bookEndTime
+                ) {
                     return false;
                 }
             }
@@ -130,14 +128,14 @@ class AppServiceProvider extends ServiceProvider
 
             // If request data is not provided then return false
             if (!isset($request['date']) or !isset($request['start_time']) or !isset($request['activity_id'])) {
+
                 return false;
             }
 
             // Find activity or return false
             try {
                 $activity = Activity::findOrFail($request['activity_id']);
-            }
-            catch (ModelNotFoundException $e) {
+            } catch (ModelNotFoundException $e) {
                 return false;
             }
 
@@ -158,7 +156,6 @@ class AppServiceProvider extends ServiceProvider
             // Working time alias
             $wStartTime = $workingTime->start_time;
             $wEndTime = $workingTime->end_time;
-
 
             // Check if booking is in between employee working time
             if ($pStartTime >= $wStartTime and $pEndTime <= $wEndTime) {
@@ -185,8 +182,7 @@ class AppServiceProvider extends ServiceProvider
             // Find activity or return false
             try {
                 $activity = Activity::findOrFail($value);
-            }
-            catch (ModelNotFoundException $e) {
+            } catch (ModelNotFoundException $e) {
                 return false;
             }
 

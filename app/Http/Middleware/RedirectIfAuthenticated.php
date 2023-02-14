@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-use App\BusinessOwner;
+use App\Models\BusinessOwner;
 
 class RedirectIfAuthenticated
 {
@@ -31,20 +31,19 @@ class RedirectIfAuthenticated
                     if (BusinessOwner::first()) {
                         // Go to dashboard
                         $redirectURL = '/admin';
-                    }
-                    else {
+                    } else {
                         // Else go to business owner registration
                         $redirectURL = '/admin/register';
                     }
 
                     break;
-                
+
                 default:
                     // All else fails, redirect to login
                     $redirectURL = '/login';
                     break;
             }
-            
+
             return redirect($redirectURL);
         }
 

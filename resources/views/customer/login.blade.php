@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-	@if (!BusinessOwner::first())
+	@if (!\App\Models\BusinessOwner::first())
 		<div class="alert alert-info">
 			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 			<strong>No Business Found!</strong> Register your business <a href="/admin/register">here</a>

@@ -2,7 +2,7 @@
 
 <head>
 	<title>
-		@if ($business = BusinessOwner::first())
+		@if ($business = \App\Models\BusinessOwner::first())
 			{{ $business->business_name }}: Booking System
 		@else
 			Business Placeholder
@@ -31,11 +31,11 @@
 		<div class="clearfix"></div>
 		<div class="header">
 			<a class="header__title" href="/">
-				@if ($business = BusinessOwner::first())
+				@if ($business = \App\Models\BusinessOwner::first())
 					@if ($business->logo)
 						<img class="logo logo--large padding-bottom-three padding-top-three" alt="" src="{{ asset('storage/' . $business->logo) }}">
 					@else
-						<h1>{{ BusinessOwner::first()->business_name }}</h1>
+						<h1>{{ \App\Models\BusinessOwner::first()->business_name }}</h1>
 					@endif
 				@else
 					<h1>Business Placeholder</h1>

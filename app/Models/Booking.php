@@ -1,16 +1,16 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\Activity;
-use App\WorkingTime;
-
 use Carbon\Carbon as Time;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Booking extends Model
 {
+	use HasFactory;
+
 	protected $guarded = [];
 
 	/**

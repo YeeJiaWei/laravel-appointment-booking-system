@@ -2,19 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BusinessOwner;
+use App\Models\BusinessTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
-
-use App\Activity;
-use App\Booking;
-use App\BusinessOwner;
-use App\BusinessTime;
-use App\Customer;
-use App\Employee;
-use App\WorkingTime;
-
-use Carbon\Carbon as Time;
 
 class BusinessTimeController extends Controller
 {

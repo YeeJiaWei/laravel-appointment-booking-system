@@ -3,23 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\BusinessOwner;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\UploadedFile;
-
-use App\Activity;
-use App\Booking;
-use App\BusinessOwner;
-use App\Customer;
-use App\Employee;
-use App\WorkingTime;
-
-use Carbon\Carbon as Time;
 
 class BusinessOwnerController extends Controller
 {

@@ -1,13 +1,16 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 use Carbon\Carbon as Time;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Activity extends Model
 {
+	use HasFactory;
+
 	protected $guarded = [];
 
 	// Declare public accessors

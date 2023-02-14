@@ -4,19 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
-use App\Activity;
-use App\Booking;
-use App\BusinessOwner;
-use App\Customer;
-use App\Employee;
-use App\WorkingTime;
-
+use App\Models\Activity;
+use App\Models\Booking;
+use App\Models\BusinessOwner;
+use App\Models\Employee;
+use App\Models\WorkingTime;
 use Carbon\Carbon as Time;
 
 class BookingController extends Controller
@@ -56,7 +51,7 @@ class BookingController extends Controller
             'employee_id.is_on_booking' => 'The :attribute is already working on another booking at that time.',
             'activity_id.exists' => 'The :attribute does not exist.',
             'activity_id.is_end_time_valid' => 'The :attribute duration added on start time is invalid. Please add a start time that does not go to the next day.',
-            'date.after' => 'The :attribute must be before today ' . toDate(getNow(), true) . '.',
+            'date.after' => 'The :attribute must be after ' . toDate(getNow(), true) . '.',
         ];
 
         // Validation rules
@@ -186,7 +181,7 @@ class BookingController extends Controller
         $workingTimes = $workingTimes
             ->where('date', '<=', $date->endOfMonth()->toDateString())
             ->where('date', '>=', $date->startOfMonth()->toDateString())
-            ->get();
+            ;
 
         return view('customer.create.bookings', [
             'business'      => BusinessOwner::first(),

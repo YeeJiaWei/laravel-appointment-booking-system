@@ -1,13 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 
-use App\Booking;
-use App\Employee;
-use App\WorkingTime;
+use App\Models\Booking;
+use App\Models\Employee;
 
 use Carbon\Carbon as Time;
 

@@ -1,16 +1,17 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 
-use App\WorkingTime;
-
 use Carbon\Carbon as Time;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class BusinessTime extends Model
 {
+    use HasFactory;
+
     protected $guarded = [];
 
     // Disable timestamps

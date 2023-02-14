@@ -29,7 +29,7 @@
                                         @endforeach
                                     @endif
                                 @else
-                                    @foreach (Employee::all() as $employee)
+                                    @foreach (\App\Models\Employee::all() as $employee)
                                         @if ($items = $employee->availableTimes($cDate->toDateString()))
                                             @foreach ($items as $item)
                                                 <section class="item__block item__block--calendar">

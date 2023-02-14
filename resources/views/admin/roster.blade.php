@@ -12,7 +12,7 @@
 			</div>
 		@endif
 		@include('shared.error_message')
-		@if (!Employee::first())
+		@if (!\App\Models\Employee::first())
 			@include('shared.error_message_custom', [
 				'title' => 'Employees do not exist.',
 				'message' => 'Create an employee <a href="/admin/employees">here</a>.',
@@ -23,7 +23,7 @@
 		<div class="form-group">
 			<label for="roster_employee">Employee <span class="request__validate">(Title - Full Name - ID)</span></label>
 			<select name="employee_id" id="roster_employee" class="form-control request__input" onchange="showRedirect('.loading', '/admin/roster/{{ $dateString }}/' + this.value)">
-				@foreach (Employee::all()->sortBy('lastname')->sortBy('firstname')->sortBy('title') as $e)
+				@foreach (\App\Models\Employee::all()->sortBy('lastname')->sortBy('firstname')->sortBy('title') as $e)
 					<option value="{{ $e->id }}" {{ old('employee_id') == $e->id || $employeeID == $e->id ? 'selected' : null }}>{{ $e->title . ' - ' . $e->firstname . ' ' . $e->lastname . ' - ' . $e->id }}</option>
 				@endforeach
 				<option value="" {{ old('employee_id') || $employeeID ? null : 'selected' }}>-- None --</option>
